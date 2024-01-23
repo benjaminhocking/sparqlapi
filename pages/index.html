@@ -174,7 +174,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         var toggle_i = 0;
         if(urlParams.get('graph_id')!=null){
-            toggle_i = urlParams.get('graph_id');
+            toggle_i = parseInt(urlParams.get('graph_id'));
         }
 
         function toggle_graph(){
