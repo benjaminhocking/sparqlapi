@@ -171,25 +171,12 @@
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         var datasets = ["/graph_1.json", "/dataset1.json", "/dataset2.json"];
+        const urlParams = new URLSearchParams(window.location.search);
         var toggle_i = 0;
-
-        function toggle_graph(){
-            if(toggle_i<2){
-                toggle_i+=1;
-            }else{
-                toggle_i =0;
-            }
-            draw_data(datasets[toggle_i]);
+        if(urlParams.get('graph_id')!=""){
+            toggle_i = urlParams.get('graph_id');
         }
-        var last_toggle = toggle_i;
-
-        function draw_data(url){
-            d3.json(url, function (error, graph) {
-                if (error) throw error;
-                update(graph.links, graph.nodes);
-                last_toggle = toggle_i;
-            })    
-        }
+        
 
         d3.json(datasets[toggle_i], function (error, graph) {
             if (error) throw error;
