@@ -107,6 +107,9 @@
             <div class="update">
                 <button style="z-index: index -1l;" onclick="window.location.reload();">Refresh Graph</button>
             </div>
+            <div class="update">
+                <button style="z-index: index -1l;" onclick="toggle_graph();">Toggle Graph</button>
+            </div>
         </div>
         <div class="output">
             <div class="query_out">
@@ -139,6 +142,7 @@
 
         
     <script type="text/javascript">
+
         var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
         var svg = d3.select("svg"),
@@ -167,8 +171,18 @@
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         var datasets = ["/graph_1.json", "/dataset1.json", "/dataset2.json"];
+        var toggle_i = 0;
 
-        d3.json("/graph_1.json", function (error, graph) {
+        function toggle_graph(){
+            if(toggle_i<2){
+                toggle_i+=1;
+            }else{
+                toggle_i =0;
+            }
+             
+        }
+
+        d3.json(datasets[toggle_i], function (error, graph) {
             if (error) throw error;
             update(graph.links, graph.nodes);
         })
