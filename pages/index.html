@@ -173,7 +173,7 @@
         var datasets = ["/graph_1.json", "/dataset1.json", "/dataset2.json"];
         const urlParams = new URLSearchParams(window.location.search);
         var toggle_i = 0;
-        if(urlParams.get('graph_id')!=""){
+        if(urlParams.get('graph_id')!=null){
             toggle_i = urlParams.get('graph_id');
         }
         
