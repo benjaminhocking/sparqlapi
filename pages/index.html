@@ -179,12 +179,22 @@
             }else{
                 toggle_i =0;
             }
-             
+            draw_data(datasets[toggle_i]);
+        }
+        var last_toggle = toggle_i;
+
+        function draw_data(url){
+            d3.json(url, function (error, graph) {
+                if (error) throw error;
+                update(graph.links, graph.nodes);
+                last_toggle = toggle_i;
+            })    
         }
 
         d3.json(datasets[toggle_i], function (error, graph) {
             if (error) throw error;
             update(graph.links, graph.nodes);
+            last_toggle = toggle_i;
         })
 
         function update(links, nodes) {
