@@ -96,6 +96,16 @@ func setupRoutes(m map[string]handlerFunc, mux *http.ServeMux){
 	}
 }
 
+func dataset1Handler(w http.ResponseWriter, req *http.Request){
+	cont := utils.ReadFile("data/dataset1.json")
+	fmt.Fprintf(w, cont)
+}
+
+func dataset2Handler(w http.ResponseWriter, req *http.Request){
+	cont := utils.ReadFile("data/dataset2.json")
+	fmt.Fprintf(w, cont)
+}
+
 func main(){
 	//port to listen on
 	listenAddr := ":8080"
@@ -113,6 +123,8 @@ func main(){
 		"/graph.json": graphHandler,
 		"/createGraph":createGraph,
 		"/graph_1.json": graph1Handler,
+		"/dataset1.json": dataset1Handler,
+		"/dataset2.json": dataset2Handler,
 	}
 
 	//setup routes	

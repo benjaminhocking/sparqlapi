@@ -166,6 +166,8 @@
             .force("charge", d3.forceManyBody())
             .force("center", d3.forceCenter(width / 2, height / 2));
 
+        var datasets = ["/graph_1.json", "/dataset1.json", "/dataset2.json"];
+
         d3.json("/graph_1.json", function (error, graph) {
             if (error) throw error;
             update(graph.links, graph.nodes);
