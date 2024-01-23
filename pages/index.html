@@ -178,6 +178,11 @@
         }
 
         function toggle_graph(){
+            if(toggle_i<2){
+                toggle_i+=1;
+            }else{
+                toggle_i=0;
+            }
             window.location.replace("?graph_id="+toggle_i.toString());
         }
         
