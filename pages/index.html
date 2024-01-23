@@ -176,6 +176,10 @@
         if(urlParams.get('graph_id')!=null){
             toggle_i = urlParams.get('graph_id');
         }
+
+        function toggle_graph(){
+            window.location.replace("?graph_id="+toggle_i.toString());
+        }
         
 
         d3.json(datasets[toggle_i], function (error, graph) {
