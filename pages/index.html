@@ -236,20 +236,8 @@
                 .style("pointer-events", "none")
                 .style("stroke-width", 5)
                 .append("svg:tspan")
-                .attr('d', function(d) {
-                    var deltaX = d.target.x - d.source.x,
-                        deltaY = d.target.y - d.source.y,
-                        dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
-                        normX = deltaX / dist,
-                        normY = deltaY / dist,
-                        sourcePadding = d.left ? 42 : 37,
-                        targetPadding = d.right ? 42 : 37,
-                        sourceX = d.source.x + (sourcePadding * normX),
-                        sourceY = d.source.y + (sourcePadding * normY),
-                        targetX = d.target.x - (targetPadding * normX),
-                        targetY = d.target.y - (targetPadding * normY);
-                    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
-                })
+                .attr("dy", 5)
+                .attr("dx", 100)
                 .text(function (d) {return d.type});
 
             node = svg.selectAll(".node")
