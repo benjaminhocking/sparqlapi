@@ -75,10 +75,6 @@ func queryHandler(w http.ResponseWriter, req *http.Request){
 	fmt.Fprintf(w, string(b))
 }
 
-func dataHandler(w http.ResponseWriter, req *http.Request){
-	cont := utils.ReadFile("data/data.json")
-	fmt.Fprintf(w, cont)
-}
 
 func graphHandler(w http.ResponseWriter, req *http.Request){
 	cont := utils.ReadFile("data/graph.json")
@@ -118,7 +114,6 @@ func main(){
 		"/": indexHandler,
 		"/new_rec": newRecHandler,
 		"/query": queryHandler,
-		"/data.json": dataHandler,
 		"/index_1": index1Handler,
 		"/graph.json": graphHandler,
 		"/createGraph":createGraph,
