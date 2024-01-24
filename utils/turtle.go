@@ -90,7 +90,7 @@ func getVars(s []string) []string {
 }
 
 //return a triple object given a new record string
-func CreateTriple(s string, filePath string) (Trile, error){
+func CreateTriple(s string, filePath string) (Triple, error){
 	if !ValidateNewRecord(s, filePath){
 		return Triple{"","",""}, errors.New("invalid")
 	}
