@@ -2,6 +2,11 @@
 A simple sparql-like api written in Go.
 Users can build their own directed graph to explain relationships between things. Two examples are provided: a friends and family dataset, and the ODRL information model.
 
+
+https://github.com/benjaminhocking/sparqlapi/assets/57410207/3bf92477-ae19-4154-9397-b9898294dc44
+
+
+
 # How To Use
 ## Setup
 Clone the repo and either:
