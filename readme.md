@@ -9,4 +9,4 @@ Clone the rep and either:
  - deploy to an aws instance (t2.micro recommended)
 ## Functionality
 Build your own dataset by creating new records of the syntax:
-    "<subject> <predicate> <object> ."
+    "\<subject\> \<predicate\> \<object\> ."
