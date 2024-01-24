@@ -13,6 +13,7 @@ Build your own dataset by creating new triples of the syntax:
 
 Query your database by using this SPARQL-like syntax:
 > SELECT ?var1 ?var2
+
 > WHERE { ?var1 \<predicate\> \<object\> }
 
 ## Roadmap:
