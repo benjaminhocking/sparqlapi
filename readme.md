@@ -8,5 +8,5 @@ Clone the rep and either:
  - run on your local machine at localhost
  - deploy to an aws instance (t2.micro recommended)
 ## Functionality
-Build your own dataset by creating new records of the syntax:
+Build your own dataset by creating new triples of the syntax:
 > \<subject\> \<predicate\> \<object\> .
