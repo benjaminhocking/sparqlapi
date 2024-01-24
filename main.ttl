@@ -15,4 +15,3 @@ Oliver hasMother Evelyn .
 Chris hasWife Evelyn .
 Evelyn hasHusband Chris .
 Ben hasGirlfriend Nicky .
-DeonticData hasEmployee Georgia .
