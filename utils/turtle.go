@@ -24,6 +24,7 @@ type QueryTriple struct{
 
 type QueryType int
 
+//return file object given filePath
 func openDB(filePath string) *os.File {
 	file, err := os.Open(filePath)
 	if err != nil{
@@ -32,7 +33,7 @@ func openDB(filePath string) *os.File {
 	return file
 }
 
-
+//save this triple object to .ttl file
 func SaveTriple(t Triple, filePath string){
 	cont := []byte(t.Subject + " " + t.Predicate + " " + t.Object + " .\n")
 	f, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -48,6 +49,7 @@ func SaveTriple(t Triple, filePath string){
 	}
 }
 
+//return true if this record exists in the file at filePath, else false
 func HasRecord(s string, filePath string) bool{
 	file := openDB(filePath)
 	defer file.Close()
@@ -61,6 +63,7 @@ func HasRecord(s string, filePath string) bool{
 	return false
 }
 
+//return true if valid triple, else false
 func ValidateNewRecord(s string, filePath string) bool{
 	tokens := strings.Split(s, " ")
 	if len(tokens)!=4{
@@ -75,6 +78,7 @@ func ValidateNewRecord(s string, filePath string) bool{
 	return true
 }
 
+//return vars used for SELECT query
 func getVars(s []string) []string {
 	res := []string{}
 	for _, v := range s{
@@ -85,7 +89,8 @@ func getVars(s []string) []string {
 	return res
 }
 
-func CreateTriple(s string, filePath string) (Triple, error){
+//return a triple object given a new record string
+func CreateTriple(s string, filePath string) (Trile, error){
 	if !ValidateNewRecord(s, filePath){
 		return Triple{"","",""}, errors.New("invalid")
 	}
@@ -94,6 +99,7 @@ func CreateTriple(s string, filePath string) (Triple, error){
 	return t, nil
 }
 
+//identify whether var appears in subject predicate or object position
 func getVarMap(vars []string, tokens []string) map[string]int{
 	//work out where each of the vars appears in the triple, return map is of the form:
 	/*	
@@ -114,6 +120,7 @@ func getVarMap(vars []string, tokens []string) map[string]int{
 	return m
 }
 
+//given a new record string split by spaces, return a querytriple object for matching
 func getQueryTriple(s []string) QueryTriple{
 	sub := s[2]
 	pred := s[3]
@@ -122,6 +129,7 @@ func getQueryTriple(s []string) QueryTriple{
 	return qt
 }
 
+//given a .ttl file and a query, return all vars
 func query(qt QueryTriple, vars []string, varMap map[string]int, filePath string) []map[string]string{
 	file := openDB(filePath)
 	defer file.Close()
@@ -152,6 +160,7 @@ func query(qt QueryTriple, vars []string, varMap map[string]int, filePath string
 	return matches
 }
 
+// return true if this line matches querytriple
 func match(s string, qt QueryTriple) bool{
 	//QueryTriple will contain the values that a match must have:
 	//	for any ?var value, this can match anything
@@ -168,6 +177,7 @@ func match(s string, qt QueryTriple) bool{
 	return true
 }
 
+//debug tool to print the result of a query
 func PrintRes(res []map[string]string){
 	for _, v := range res{
 		for k, val := range v{
@@ -175,6 +185,8 @@ func PrintRes(res []map[string]string){
 		}
 	}
 }
+
+//convert query result to a readable string
 func StringRes(res []map[string]string) string{
 	s := ""
 	for _, v := range res{
@@ -185,12 +197,14 @@ func StringRes(res []map[string]string) string{
 	return s
 }
 
+//convert string to triple object
 func lineToTriple(line string) Triple{
 	tokens := strings.Split(line, " ")
 	t := Triple{tokens[0], tokens[1], tokens[2]}
 	return t
 }
 
+//return map of id:resource for all resources in file at filePath
 func GetResourceMap(filePath string) map[int]string{
 	file := openDB(filePath)
 	defer file.Close()
@@ -215,6 +229,7 @@ func GetResourceMap(filePath string) map[int]string{
 	return m
 }
 
+//return nodes in d3.js desired format
 func GetNodes(resources map[int]string) []map[string]any{
 	nodes := []map[string]any{}
 	for k, v := range resources{
@@ -224,6 +239,7 @@ func GetNodes(resources map[int]string) []map[string]any{
 	return nodes
 }
 
+//return resource id given the name of the resource
 func getResourceId(resourceName string, nodes []map[string]any) int{
 	for _, node := range nodes{
 		if resourceName == node["name"]{
@@ -234,6 +250,7 @@ func getResourceId(resourceName string, nodes []map[string]any) int{
 	return -1
 }
 
+//given the nodes and filePath for .ttl file, return an array of the links between them
 func GetLinks(nodes []map[string]any, filePath string) []map[string]any{
 	file := openDB(filePath)
 	defer file.Close()
@@ -248,6 +265,7 @@ func GetLinks(nodes []map[string]any, filePath string) []map[string]any{
 	return links
 }
 
+//given a query and a filePath, process the query and return the results
 func MakeQuery(s string, filePath string) []map[string]string{
 	lines := strings.Split(s, "\n")
 	line1 := lines[0]
