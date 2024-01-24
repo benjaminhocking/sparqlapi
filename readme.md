@@ -10,6 +10,7 @@ Clone the repo and either:
 ## Functionality
 Build your own dataset by creating new triples of the syntax:
 > \<subject\> \<predicate\> \<object\> .
+
 Query your database by using this SPARQL-like syntax:
 > SELECT ?var1 ?var2
 > WHERE { ?var1 \<predicate\> \<object\> }
