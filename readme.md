@@ -4,7 +4,7 @@ Users can build their own directed graph to explain relationships between things
 
 # How To Use
 ## Setup
-Clone the rep and either:
+Clone the repo and either:
  - run on your local machine at localhost
  - deploy to an aws instance (t2.micro recommended)
 ## Functionality
